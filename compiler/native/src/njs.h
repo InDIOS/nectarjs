@@ -29,6 +29,7 @@
 #include <sstream>
 #include <memory>
 #include <vector>
+#include <iomanip>
 #define _USE_MATH_DEFINES
 #include <stdarg.h>
 
@@ -40,10 +41,21 @@
 #include <new.h>
 #include <time.h>
 #include <nonstd-function.h>
-#include <cmath>
+#include <math.h>
+namespace std
+{
+	double fmod(double __x, double __y)
+	{
+		return fmod(__x, __y);
+	}
+}
+#undef max
+#undef min
 #include <limits>
 #else
 #include <functional>
+#include <cmath>
+#include <limits>
 #endif
 
 #include "enum.h"
@@ -68,14 +80,11 @@ namespace NJS
 
 #include "var_header.h"
 #include "type.h"
-#include "values.h"
 #include "classes_header.h"
+#include "values.h"
 #include "functions.h"
 #include "this.h"
 #include "var.h"
-
-
-
 #include "objmgmt.h"
 #include "classes.h"
 #include "operator.h"

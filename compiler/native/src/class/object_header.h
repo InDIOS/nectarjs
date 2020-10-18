@@ -9,12 +9,14 @@ namespace NJS::Class
 		// Constructors
 		Object();
 		// Properties
-		count_t counter = 1;
+		count_t counter = 0;
 		NJS::Type::object_t object;
 		bool prototype = false;
 		NJS::Type::vector_p instance;
 		// Methods
 		inline void Delete() noexcept;
+		inline void jsDelete(const std::string _key) noexcept;
+		
 		inline void* Copy() noexcept;
 		// Native cast
 		explicit operator bool() const noexcept;

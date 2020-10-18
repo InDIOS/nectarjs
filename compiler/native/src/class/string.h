@@ -21,7 +21,10 @@ namespace NJS::Class
 	// Methods
 	inline void String::Delete() noexcept
 	{
-		delete this;
+		if(--counter == 0)
+		{
+			delete this;
+		}
 	}
 	inline void* String::Copy() noexcept
 	{
@@ -33,20 +36,29 @@ namespace NJS::Class
 	{
 		std::string::size_type end;
 		double res;
+		#ifndef __NJS_ARDUINO
 		try
 		{
-			res = std::stod(value, &end);
-		}catch(std::invalid_argument e){}
+			res = std::stoi(value, &end, 10);
+		}catch(...){}
+		#else
+			res = std::stoi(value, &end, 10);
+		#endif
+		
 		return end == value.size() ? res : std::numeric_limits<double>::quiet_NaN();
 	}
 	String::operator int() const noexcept
 	{
 		std::string::size_type end;
 		int res;
+		#ifndef __NJS_ARDUINO
 		try
 		{
 			res = std::stoi(value, &end, 10);
-		}catch(std::invalid_argument e){}
+		}catch(...){}
+		#else
+			res = std::stoi(value, &end, 10);
+		#endif
 		
 		return end == value.size() ? res : std::numeric_limits<int>::quiet_NaN();
 	}
@@ -54,10 +66,14 @@ namespace NJS::Class
 	{
 		std::string::size_type end;
 		long long res;
+		#ifndef __NJS_ARDUINO
 		try
 		{
-			res = std::stoll(value, &end, 10);
-		}catch(std::invalid_argument e){}
+			res = std::stoi(value, &end, 10);
+		}catch(...){}
+		#else
+			res = std::stoi(value, &end, 10);
+		#endif
 
 		return end == value.size() ? res : std::numeric_limits<long long>::quiet_NaN();
 	}
@@ -168,7 +184,7 @@ namespace NJS::Class
 			return _length;
 		}
 		
-		object.push_back(NJS::Type::pair_t(((std::string)*this).c_str(), __NJS_VAR()));
+		object.push_back(NJS::Type::pair_t(((std::string)*this).c_str(), undefined));
 		return object[object.size() - 1].second;
 	}
 	#endif

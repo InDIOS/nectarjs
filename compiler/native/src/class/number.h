@@ -1,8 +1,5 @@
 #pragma once
 #include "number_header.h"
-#include <cmath>
-#include <limits>
-#include <iomanip>
 
 namespace NJS::Class
 {
@@ -90,7 +87,10 @@ namespace NJS::Class
 	// Methods
 	inline void Number::Delete() noexcept
 	{
-		delete this;
+		if(--counter == 0)
+		{
+			delete this;
+		}
 	}
 	inline void* Number::Copy() noexcept
 	{
