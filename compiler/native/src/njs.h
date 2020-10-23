@@ -32,9 +32,9 @@
 #include <iomanip>
 #define _USE_MATH_DEFINES
 #include <stdarg.h>
+#include <tuple>
 
-
-#ifdef __NJS_ARDUINO
+#ifdef __NJS_ENV_ARDUINO
 #include <util/delay.h>
 #include <string.h>
 #include <WString.h>
@@ -86,6 +86,8 @@ namespace NJS
 #include "this.h"
 #include "var.h"
 #include "objmgmt.h"
+#include "event.h"
 #include "classes.h"
 #include "operator.h"
 #include "native.h"
+#include "std_global_js.h"

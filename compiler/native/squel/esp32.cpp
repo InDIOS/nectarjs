@@ -5,17 +5,28 @@
 #include "esp_system.h"
 #include "esp_spi_flash.h"
 
+#define __NJS_ENV_ESP32
+#define __NJS_NO_EXCEPT
+
 #include "njs.h"
 
  {INCLUDE}
  
  {DECL}
  
-void app_main(void)
-{
-    {INIT}
-	
+ 
+ namespace NJS
+ {
+	void __NJS_MAIN()
 	{
-		{CODE}
+		 {INIT}
+		{
+			{CODE}
+		}
 	}
+ }
+ 
+extern "C" void app_main(void)
+{
+	NJS::__NJS_MAIN();
 }

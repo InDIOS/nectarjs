@@ -22,7 +22,6 @@ namespace NJS::Class
 		inline void Delete() noexcept;
 		inline void jsDelete(std::string _key) noexcept;
 		inline void* Copy() noexcept;
-		
 		NJS::VAR Call(var& __NJS_THIS, NJS::VAR* __NJS_VARARGS, int __NJS_VARLENGTH);
 		
 		template <class... Args>
@@ -38,7 +37,7 @@ namespace NJS::Class
 		NJS::VAR &operator[](NJS::VAR key);
 		template <class... Args> NJS::VAR operator()(Args... args);
 		// Comparation operators
-		Function operator!() const;
+		NJS::VAR operator!() const;
 		bool operator==(const Function &_v1) const;
 		// === emulated with __NJS_EQUAL_VALUE_AND_TYPE
 		// !== emulated with __NJS_NOT_EQUAL_VALUE_AND_TYPE

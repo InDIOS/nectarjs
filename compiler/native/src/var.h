@@ -154,7 +154,7 @@ namespace NJS
 	{
 		if (this->type != NJS::Enum::Type::Function)
 		{
-	#ifndef __NJS_ARDUINO
+	#ifndef __NJS_NO_EXCEPT
 			throw NJS::VAR("TypeError: object is not a function");
 	#endif
 			exit(1);
@@ -167,7 +167,7 @@ namespace NJS
 	{
 		if (this->type != NJS::Enum::Type::Function)
 		{
-	#ifndef __NJS_ARDUINO
+	#ifndef __NJS_NO_EXCEPT
 			throw NJS::VAR("TypeError: object is not a function");
 	#endif
 			exit(1);
@@ -501,7 +501,7 @@ namespace NJS
 		return (std::string)(*(NJS::Class::Base*)_ptr);
 	}
 
-	VAR::operator const long long() const
+	VAR::operator long long() const
 	{
 		return (long long)((double)*this);
 	}

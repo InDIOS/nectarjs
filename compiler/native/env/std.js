@@ -27,7 +27,7 @@ var STD =
     name: "std",
     main: "std.cpp",
     compiler: "g++",
-    stdlib: ["console", "performance", "RegExp", "Number", "Object", "Math", "JSON", "Array", "Date"],
+    stdlib: ["console", {bind:"performance", module:"Performance"}, "RegExp", "Number", "Object", "Math", "JSON", "Array", "Date"],
     check: 
     {
         "env": 
@@ -42,7 +42,6 @@ var STD =
             "indent": "off",
             "linebreak-style": "off",
             "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
-            "no-redeclare": ["error", { "builtinGlobals": false }],
 			"no-const-assign": "error",
         },
         "globals":

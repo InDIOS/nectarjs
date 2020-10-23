@@ -36,13 +36,13 @@ namespace NJS::Class
 	{
 		std::string::size_type end;
 		double res;
-		#ifndef __NJS_ARDUINO
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		try
 		{
-			res = std::stoi(value, &end, 10);
+			res = std::stod(value, &end);
 		}catch(...){}
 		#else
-			res = std::stoi(value, &end, 10);
+			res = std::stod(value, &end);
 		#endif
 		
 		return end == value.size() ? res : std::numeric_limits<double>::quiet_NaN();
@@ -51,7 +51,7 @@ namespace NJS::Class
 	{
 		std::string::size_type end;
 		int res;
-		#ifndef __NJS_ARDUINO
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		try
 		{
 			res = std::stoi(value, &end, 10);
@@ -66,13 +66,13 @@ namespace NJS::Class
 	{
 		std::string::size_type end;
 		long long res;
-		#ifndef __NJS_ARDUINO
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		try
 		{
-			res = std::stoi(value, &end, 10);
+			res = std::stoll(value, &end, 10);
 		}catch(...){}
 		#else
-			res = std::stoi(value, &end, 10);
+			res = std::stoll(value, &end, 10);
 		#endif
 
 		return end == value.size() ? res : std::numeric_limits<long long>::quiet_NaN();
@@ -192,16 +192,18 @@ namespace NJS::Class
 	template <class... Args>
 	NJS::VAR String::operator()(Args... args) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return undefined;
 	}
 	// Comparation operators
 	String String::operator!() const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	bool String::operator==(const String &_v1) const { return value.compare(_v1.value) == 0; }
 	// === emulated with __NJS_EQUAL_VALUE_AND_TYPE
@@ -214,144 +216,167 @@ namespace NJS::Class
 	// Numeric operators
 	String String::operator+() const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator-() const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator++(const int _v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator--(const int _v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator+(const String &_v1) const { return value + _v1.value; }
 	String String::operator+=(const String &_v1) { value += _v1.value; return *this; }
 	String String::operator-(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator-=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator*(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator*=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	// TODO: "**" and "**=" operators
 	String String::operator/(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator/=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator%(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator%=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator&(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator|(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator^(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator~() const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator>>(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator<<(const String &_v1) const 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator&=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator|=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator^=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator>>=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	String String::operator<<=(const String &_v1) 
 	{
-		#ifndef __NJS_ARDUINO 
+		#if !defined(__NJS_ENV_ARDUINO) && !defined(__NJS_ENV_ESP32)
 		throw InvalidTypeException();
 		#endif
+		return String();
 	}
 	// TODO: ">>>" and ">>>=" operators
 	/*** STRING METHODS ***/
